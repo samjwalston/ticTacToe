@@ -1,0 +1,90 @@
+/* 
+Dark Brown - #4b3832
+Reddish Brown - #854442
+Cream - #fff4e6
+Purplish Brown - #3c2f2f
+Light Brown - #be9b7b
+*/
+
+body {
+	margin: 0px;
+	height: 800px;
+	font-family: arial;
+	background-color: #fff4e6;
+}
+#reset {
+	background-color: #fff4e6;
+	border: none;
+	outline: none;
+	width: 10%;
+	height: 5%;
+	font-size: 20px;
+}
+
+#board {
+	width: 50%;
+	height: 50%;
+	margin: 0px auto;
+	margin-top: 50px;
+}
+
+.button {
+	background-color: #fff4e6;
+	border: none;
+	outline: none;
+	width: 32.9%;
+	height: 32.9%;
+	display: inline-block;
+	font-size: 125px;
+	color: #be9b7b;
+}
+
+#sq2 {
+	border-left: 5px solid #4b3832;
+	margin-left: -5px;
+}
+
+#sq3 {
+	border-left: 5px solid #4b3832;
+	margin-left: -5px;
+}
+
+#sq4 {
+	border-top: 5px solid #4b3832;
+}
+
+#sq5 {
+	border-top: 5px solid #4b3832;
+	border-left: 5px solid #4b3832;
+	margin-left: -5px;
+}
+
+#sq6 {
+	border-top: 5px solid #4b3832;
+	border-left: 5px solid #4b3832;
+	margin-left: -5px;
+}
+
+#sq7 {
+	border-top: 5px solid #4b3832;
+}
+
+#sq8 {
+	border-top: 5px solid #4b3832;
+	border-left: 5px solid #4b3832;
+	margin-left: -5px;
+}
+
+#sq9 {
+	border-top: 5px solid #4b3832;
+	border-left: 5px solid #4b3832;
+	margin-left: -5px;
+}
+
+#winner {
+	width: 100%;
+	text-align: center;
+	margin-top: 50px;
+	font-size: 45px;
+	color: #3c2f2f;
+}
