@@ -10,7 +10,8 @@
 <body>
 <div id="navbar">
 	<input type="button" class="button" id="reset" value="Reset" onclick="reset()">
-	<div id="middle">Under Development</div>
+	<div id="gameMode">Under Development</div>
+	<input type="button" class="button" id="restart" value="Restart" onclick="restart()">
 </div>
 
 <div class="" id="gameStats">
@@ -27,6 +28,11 @@
 	</ul>
 </div>
 
+<div id="startMenu">
+	<p class="start" id="startTitle">Welcome!</p>
+	<div class="start" id="gameStart" onclick="startGame()"> Start Game</div>
+</div>
+
 <div id="board">
 	<div class="square" id="sq1" onmouseover="mouseOver(1)" onmouseout="mouseOut(1)" onclick = "userChoice(1)"></div>
 	<div class="square" id="sq2" onmouseover="mouseOver(2)" onmouseout="mouseOut(2)" onclick = "userChoice(2)"></div>
@@ -37,10 +43,10 @@
 	<div class="square" id="sq7" onmouseover="mouseOver(7)" onmouseout="mouseOut(7)" onclick = "userChoice(7)"></div>
 	<div class="square" id="sq8" onmouseover="mouseOver(8)" onmouseout="mouseOut(8)" onclick = "userChoice(8)"></div>
 	<div class="square" id="sq9" onmouseover="mouseOver(9)" onmouseout="mouseOut(9)" onclick = "userChoice(9)"></div>
-	<div class="line animated fadeInRight" id="ln1"></div>
-	<div class="line animated fadeInRight" id="ln2"></div>
-	<div class="line animated fadeInUp" id="ln3"></div>
-	<div class="line animated fadeInUp" id="ln4"></div>
+	<div class="" id="ln1"></div>
+	<div class="" id="ln2"></div>
+	<div class="" id="ln3"></div>
+	<div class="" id="ln4"></div>
 </div>
 <p id="winner"></p>
 

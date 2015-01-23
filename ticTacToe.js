@@ -1,4 +1,5 @@
 // Variables
+var mode = 1;
 var turn = 1;	// Move Counter
 var player = 1;	// Turn variable (1 equals player one and 2 equals player two)
 var playerChoices = [[],[]];
@@ -6,41 +7,8 @@ var p1Wins = 0;
 var p2Wins = 0;
 var ties = 0;
 
-// End Games Messages
-function endGame(ending){
-	if(ending == "p1Won"){
-		p1Win = "Player 1 Wins";
-		document.getElementById('winner').innerHTML = p1Win;
-	}
-	else if(ending == "p2Won"){
-		p2Win = "Player 2 Wins";
-		document.getElementById('winner').innerHTML = p2Win;
-	}
-	else if(ending == "tied"){
-		noWin = "It's a tie";
-		document.getElementById('winner').innerHTML = noWin;
-	}
-	else if(ending == "clear"){
-		eraseMessage = "";
-		document.getElementById('winner').innerHTML = eraseMessage;
-	}
-}
 
-// Resets the board
-function reset(){
-	turn = 1;
-	player = 1;
-	playerChoices = [[],[]];
-	for(z = 1; z <= 9; ++z){
-		resetColor = document.getElementById('sq' + z.toString());
-		resetColor.style.color = "#fff4e6";
-	}
-	for(y = 1; y <= 9; ++y){
-		resetValue = document.getElementById('sq' + y.toString());
-		resetValue.innerHTML = "";
-	}
-  endGame("clear");
-}
+// Pre-Move hover effects
 function mouseOver(number){
 	hover = document.getElementById('sq' + number.toString());
 	if((hover.innerHTML !== "X") && (hover.innerHTML !== "O")){
@@ -62,7 +30,38 @@ function mouseOut(number){
 		out.innerHTML = "";
 	}
 };
-function statsBoard(){
+
+
+// Creates the game board
+function startGame(){
+	createNavBar();
+	createBoard = document.getElementById('board');
+	createBoard.style.visibility = "visible";
+	for(c = 1; c < 5; c++){
+		lineStyle = document.getElementById('ln' + c.toString());
+		if(c <= 2){
+			lineStyle.className = "line animated fadeInRight";
+		}
+		else{
+			lineStyle.className = "line animated fadeInUp";
+		}
+		console.log(lineStyle);
+	}
+}
+
+
+// Creates the NavBar
+function createNavBar(){
+	startGameMenu = document.getElementById('startMenu');
+	startGameMenu.style.visibility = "hidden";
+	navBar = document.getElementById('navbar');
+	navBar.style.visibility = "visible";
+	navBar.className = "animated fadeInDown";
+}
+
+
+// Creates the stats board
+function createStatsBoard(){
 	board = document.getElementById('gameStats');
 	totalGames = (p1Wins + p2Wins + ties);
 	printTotalGames = "Total Games: " + totalGames;
@@ -80,6 +79,58 @@ function statsBoard(){
 	board.style.visibility = "visible";
 	board.className = "animated fadeIn";
 }
+
+
+// End Games Messages
+function endGame(ending){
+	if(ending == "p1Won"){
+		p1Win = "Player 1 Wins";
+		document.getElementById('winner').innerHTML = p1Win;
+	}
+	else if(ending == "p2Won"){
+		p2Win = "Player 2 Wins";
+		document.getElementById('winner').innerHTML = p2Win;
+	}
+	else if(ending == "tied"){
+		noWin = "It's a tie";
+		document.getElementById('winner').innerHTML = noWin;
+	}
+	else if(ending == "clear"){
+		eraseMessage = "";
+		document.getElementById('winner').innerHTML = eraseMessage;
+	}
+}
+
+
+// Resets the board but keeps game stats
+function reset(){
+	turn = 1;
+	player = 1;
+	playerChoices = [[],[]];
+	for(z = 1; z <= 9; ++z){
+		resetColor = document.getElementById('sq' + z.toString());
+		resetColor.style.color = "#fff4e6";
+	}
+	for(y = 1; y <= 9; ++y){
+		resetValue = document.getElementById('sq' + y.toString());
+		resetValue.innerHTML = "";
+	}
+  endGame("clear");
+}
+// Resets the board and clears game stats
+function restart(){
+	reset();
+	board = document.getElementById('gameStats');
+	board.style.visibility = "hidden";
+	board.className = "";
+	p1Wins = 0;
+	p2Wins = 0;
+	ties = 0;
+	navBar = document.getElementById('navbar');
+}
+
+
+
 
 // Main function that takes a value depending on which button is clicked and assigns it to
 // 		to the 'number' variable
@@ -111,12 +162,12 @@ function userChoice(number){
 					if(a == 0){
 						endGame("p1Won");
 						p1Wins++;
-						statsBoard();
+						createStatsBoard();
 					}
 					else if(a == 1){
 						endGame("p2Won");
 						p2Wins++;
-						statsBoard();
+						createStatsBoard();
 					}
 			}
 			// Checks to see if the counter has reached 10 meaning the board is filled up and the game
@@ -126,11 +177,11 @@ function userChoice(number){
 					player = 0;
 					endGame("tied");
 					ties++;
-					statsBoard();
+					createStatsBoard();
 				}
 			}
 		}
-	}
+	};
 
 	// Checks whether the turn is equal to 0 (Player 1)
 	if(player == 1){
