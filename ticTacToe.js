@@ -97,7 +97,6 @@ function userChoice(number){
 		// Finds if the index number of the given value is greater than or equal to 0. Which
 		// 		means that is in the array. (If the value was not in the array it would return -1).
 		for(a = 0; a < 2; ++a){
-			console.log(playerChoices[a]);
 			if(((playerChoices[a].indexOf(1) >= 0) && (playerChoices[a].indexOf(2) >= 0) && (playerChoices[a].indexOf(3) >= 0)) ||
 				((playerChoices[a].indexOf(4) >= 0) && (playerChoices[a].indexOf(5) >= 0) && (playerChoices[a].indexOf(6) >= 0)) ||
 				((playerChoices[a].indexOf(7) >= 0) && (playerChoices[a].indexOf(8) >= 0) && (playerChoices[a].indexOf(9) >= 0)) ||
@@ -122,10 +121,13 @@ function userChoice(number){
 			}
 			// Checks to see if the counter has reached 10 meaning the board is filled up and the game
 			// 		is a tie.
-			else if(turn == 10){
-				endGame("tied");
-				ties++;
-				statsBoard();
+			else if((playerChoices[0].length + playerChoices[1].length) == 9){
+				if(a == 1){
+					player = 0;
+					endGame("tied");
+					ties++;
+					statsBoard();
+				}
 			}
 		}
 	}
