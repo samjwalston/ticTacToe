@@ -2,22 +2,45 @@
 <html>
 <head>
 	<title>Tic Tac Toe Game</title>
-	<link type="text/css" rel="stylesheet" href="ticTacToe.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link type="text/css" rel="stylesheet" href="animate.css">
+	<link type="text/css" rel="stylesheet" href="ticTacToeTest.css">
 	<script type="text/javascript" src="ticTacToe.js" defer></script>
 </head>
 <body>
-<input type="button" class="button" id="reset" value="Reset" onclick="reset()">
+<div id="navbar">
+	<input type="button" class="button" id="reset" value="Reset" onclick="reset()">
+	<div id="middle">Under Development</div>
+</div>
+
+<div class="" id="gameStats">
+	<div class="stats" id="statsTitle">Game Stats</div>
+	<ul id="statsListContainer">
+		<li class="statsList" id="p1Name">Player 1</li>
+		<li class="statsList" id="p1Wins"></li>
+		<li class="statsList" id="p1Losses"></li>
+		<li class="statsList" id="p2Name">Player 2</li>
+		<li class="statsList" id="p2Wins"></li>
+		<li class="statsList" id="p2Losses"></li>
+		<li class="statsList" id="totalTies"></li>
+		<li class="statsList" id="totalGames"></li>
+	</ul>
+</div>
 
 <div id="board">
-	<input type="button" class="button" id="sq1" value="   " onclick = "userChoice(1)">
-	<input type="button" class="button" id="sq2" value="   " onclick = "userChoice(2)">
-	<input type="button" class="button" id="sq3" value="   " onclick = "userChoice(3)">
-	<input type="button" class="button" id="sq4" value="   " onclick = "userChoice(4)">
-	<input type="button" class="button" id="sq5" value="   " onclick = "userChoice(5)">
-	<input type="button" class="button" id="sq6" value="   " onclick = "userChoice(6)">
-	<input type="button" class="button" id="sq7" value="   " onclick = "userChoice(7)">
-	<input type="button" class="button" id="sq8" value="   " onclick = "userChoice(8)">
-	<input type="button" class="button" id="sq9" value="   " onclick = "userChoice(9)">
+	<div class="square" id="sq1" onmouseover="mouseOver(1)" onmouseout="mouseOut(1)" onclick = "userChoice(1)"></div>
+	<div class="square" id="sq2" onmouseover="mouseOver(2)" onmouseout="mouseOut(2)" onclick = "userChoice(2)"></div>
+	<div class="square" id="sq3" onmouseover="mouseOver(3)" onmouseout="mouseOut(3)" onclick = "userChoice(3)"></div>
+	<div class="square" id="sq4" onmouseover="mouseOver(4)" onmouseout="mouseOut(4)" onclick = "userChoice(4)"></div>
+	<div class="square" id="sq5" onmouseover="mouseOver(5)" onmouseout="mouseOut(5)" onclick = "userChoice(5)"></div>
+	<div class="square" id="sq6" onmouseover="mouseOver(6)" onmouseout="mouseOut(6)" onclick = "userChoice(6)"></div>
+	<div class="square" id="sq7" onmouseover="mouseOver(7)" onmouseout="mouseOut(7)" onclick = "userChoice(7)"></div>
+	<div class="square" id="sq8" onmouseover="mouseOver(8)" onmouseout="mouseOut(8)" onclick = "userChoice(8)"></div>
+	<div class="square" id="sq9" onmouseover="mouseOver(9)" onmouseout="mouseOut(9)" onclick = "userChoice(9)"></div>
+	<div class="line animated fadeInRight" id="ln1"></div>
+	<div class="line animated fadeInRight" id="ln2"></div>
+	<div class="line animated fadeInUp" id="ln3"></div>
+	<div class="line animated fadeInUp" id="ln4"></div>
 </div>
 <p id="winner"></p>
 
