@@ -45,7 +45,6 @@ function startGame(){
 		else{
 			lineStyle.className = "line animated fadeInUp";
 		}
-		console.log(lineStyle);
 	}
 }
 
@@ -120,13 +119,24 @@ function reset(){
 // Resets the board and clears game stats
 function restart(){
 	reset();
-	board = document.getElementById('gameStats');
-	board.style.visibility = "hidden";
-	board.className = "";
+	createBoard = document.getElementById('board');
+	createBoard.style.visibility = "hidden";
+	for(c = 1; c < 5; c++){
+		lineStyle = document.getElementById('ln' + c.toString());
+		lineStyle.className = "";
+	}
+	statsBox = document.getElementById('gameStats');
+	statsBox.style.visibility = "hidden";
+	statsBox.className = "";
+	navBar = document.getElementById('navbar');
+	navBar.style.visibility = "hidden";
+	navBar.className = "";
+	startMenu = document.getElementById('startMenu');
+	startMenu.style.visibility = "visible";
+	startMenu.className = "animated fadeIn";
 	p1Wins = 0;
 	p2Wins = 0;
 	ties = 0;
-	navBar = document.getElementById('navbar');
 }
 
 
@@ -169,11 +179,12 @@ function userChoice(number){
 						p2Wins++;
 						createStatsBoard();
 					}
+					console.log(a);
 			}
 			// Checks to see if the counter has reached 10 meaning the board is filled up and the game
 			// 		is a tie.
-			else if((playerChoices[0].length + playerChoices[1].length) == 9){
-				if(a == 1){
+			else if(a == 0){
+				if(((playerChoices[0].length + playerChoices[1].length) == 9)){
 					player = 0;
 					endGame("tied");
 					ties++;
