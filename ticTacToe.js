@@ -46,13 +46,14 @@ function startGame(){
 			lineStyle.className = "line animated fadeInUp";
 		}
 	}
+	startGameMenu = document.getElementById('startMenu');
+	startGameMenu.style.visibility = "hidden";
+	startGameMenu.className = "";
 }
 
 
 // Creates the NavBar
 function createNavBar(){
-	startGameMenu = document.getElementById('startMenu');
-	startGameMenu.style.visibility = "hidden";
 	navBar = document.getElementById('navbar');
 	navBar.style.visibility = "visible";
 	navBar.className = "animated fadeInDown";
