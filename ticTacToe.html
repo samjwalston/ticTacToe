@@ -2,53 +2,28 @@
 <html>
 <head>
 	<title>Tic Tac Toe Game</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link type="text/css" rel="stylesheet" href="animate.css">
-	<link type="text/css" rel="stylesheet" href="ticTacToeTest.css">
-	<script type="text/javascript" src="ticTacToe.js" defer></script>
+	<link type="text/css" rel="stylesheet" href="/animate.css">
+	<link type="text/css" rel="stylesheet" href="ticTacToe.css">
+	<!-- Angular -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+  <!-- Firebase -->
+  <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
+  <!-- AngularFire -->
+  <script src="https://cdn.firebase.com/libs/angularfire/0.9.1/angularfire.min.js"></script>
+  <script type="text/javascript" src="ticTacToe.js" defer></script>
 </head>
-<body>
-<div id="navbar">
-	<input type="button" class="button" id="reset" value="Reset" onclick="reset()">
-	<div id="gameMode">Under Development</div>
-	<input type="button" class="button" id="restart" value="Restart" onclick="restart()">
-</div>
-
-<div class="" id="gameStats">
-	<div class="stats" id="statsTitle">Game Stats</div>
-	<ul id="statsListContainer">
-		<li class="statsList" id="p1Name">Player 1</li>
-		<li class="statsList" id="p1Wins"></li>
-		<li class="statsList" id="p1Losses"></li>
-		<li class="statsList" id="p2Name">Player 2</li>
-		<li class="statsList" id="p2Wins"></li>
-		<li class="statsList" id="p2Losses"></li>
-		<li class="statsList" id="totalTies"></li>
-		<li class="statsList" id="totalGames"></li>
-	</ul>
-</div>
-
-<div class="animated fadeIn" id="startMenu">
-	<p class="start" id="startTitle">Welcome!</p>
-	<div class="start" id="gameStart" onclick="startGame()"> Start Game</div>
-</div>
+<body ng-app="ticTacToeApp" ng-controller="ticTacToeCtrl">
 
 <div id="board">
-	<div class="square" id="sq1" onmouseover="mouseOver(1)" onmouseout="mouseOut(1)" onclick = "userChoice(1)"></div>
-	<div class="square" id="sq2" onmouseover="mouseOver(2)" onmouseout="mouseOut(2)" onclick = "userChoice(2)"></div>
-	<div class="square" id="sq3" onmouseover="mouseOver(3)" onmouseout="mouseOut(3)" onclick = "userChoice(3)"></div>
-	<div class="square" id="sq4" onmouseover="mouseOver(4)" onmouseout="mouseOut(4)" onclick = "userChoice(4)"></div>
-	<div class="square" id="sq5" onmouseover="mouseOver(5)" onmouseout="mouseOut(5)" onclick = "userChoice(5)"></div>
-	<div class="square" id="sq6" onmouseover="mouseOver(6)" onmouseout="mouseOut(6)" onclick = "userChoice(6)"></div>
-	<div class="square" id="sq7" onmouseover="mouseOver(7)" onmouseout="mouseOut(7)" onclick = "userChoice(7)"></div>
-	<div class="square" id="sq8" onmouseover="mouseOver(8)" onmouseout="mouseOut(8)" onclick = "userChoice(8)"></div>
-	<div class="square" id="sq9" onmouseover="mouseOver(9)" onmouseout="mouseOut(9)" onclick = "userChoice(9)"></div>
-	<div class="" id="ln1"></div>
-	<div class="" id="ln2"></div>
-	<div class="" id="ln3"></div>
-	<div class="" id="ln4"></div>
+	<div ng-repeat="row in board track by $index">
+		<div class="square" id="row{{ $parent.$index }}col{{ $index }}" ng-repeat="cell in row track by $index" ng-click="makeMove($parent.$index, $index)">
+			<!-- If cell value is equal to blank then it puts &nbsp otherwise leave it alone -->
+			{{ cell == "" ? "&nbsp;" : cell }}
+		</div>
+		<div class="line" id="ln{{ $index }}" ng-repeat="line in lines track by $index"></div>
+	</div>
 </div>
-<p id="winner"></p>
+<p id="winner" ng-bind="winMessage"></p>
 
 </body>
 </html>
