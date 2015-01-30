@@ -17,8 +17,11 @@ body {
 	color: #be9b7b;
 }
 
+.hidden {
+	visibility: hidden;
+}
+
 #board {
-	/*visibility: hidden;*/
 	position: relative;
 	width: 37%;
 	height: 45%;
@@ -32,51 +35,50 @@ body {
 	width: 31%;
 	height: 31%;
 	text-align: center;
-	/*color: #fff4e6;*/
 	display: inline-block;
 }
 
-#row0col0 {
+#sq0 {
 	top: 0%;
 	left: 1%;
 }
 
-#row0col1 {
+#sq1 {
 	top: 0%;
 	left: 34%;
 }
 
-#row0col2 {
+#sq2 {
 	top: 0%;
 	left: 67%;
 }
 
-#row1col0 {
+#sq3 {
 	top: 34%;
 	left: 1%;
 }
 
-#row1col1 {
+#sq4 {
 	top: 34%;
 	left: 34%;
 }
 
-#row1col2 {
+#sq5 {
 	top: 34%;
 	left: 67%;
 }
 
-#row2col0 {
+#sq6 {
 	top: 67%;
 	left: 1%;
 }
 
-#row2col1 {
+#sq7 {
 	top: 67%;
 	left: 34%;
 }
 
-#row2col2 {
+#sq8 {
 	top: 67%;
 	left: 67%;
 }
@@ -87,7 +89,6 @@ body {
 	height: 100%;
 	width: 100%;
 	border-radius: 5px;
-	z-index: 2;
 }
 
 #ln0 {
