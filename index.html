@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tic Tac Toe Game</title>
+	<link type="text/css" rel="stylesheet" href="animate.css">
+	<link type="text/css" rel="stylesheet" href="ticTacToe.css">
+	<!-- Angular -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+  <!-- Firebase -->
+  <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
+  <!-- AngularFire -->
+  <script src="https://cdn.firebase.com/libs/angularfire/0.9.1/angularfire.min.js"></script>
+  <script type="text/javascript" src="ticTacToe.js" defer></script>
+</head>
+<body ng-app="ticTacToeApp" ng-controller="ticTacToeCtrl">
+
+<div id="board">
+	<div class="square" id="sq{{ $index }}" ng-repeat="sq in square track by $index" ng-click="makeMove($index)" ng-bind="sq.playerMove">
+		<!-- If cell value is equal to blank then it puts &nbsp otherwise leave it alone -->
+		<!-- {{ row == "" ? "&nbsp;" : row }} -->
+		</div>
+	<div class="line" id="ln{{ $index }}" ng-repeat="line in lines track by $index"></div>
+</div>
+<p id="winner" ng-bind="winMessage[0].message"></p>
+
+</body>
+</html>
