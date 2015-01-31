@@ -11,7 +11,6 @@ body {
 	width: 100%;
 	background-color: #fff4e6;
 	margin: 0px;
-	/*margin-top: -100px;*/
 	font-family: arial, sans-serif;
 	font-size: 100%;
 	color: #be9b7b;
@@ -31,13 +30,60 @@ body {
 	color: #854442;
 }
 
+#gameStats {
+	position: absolute;
+	left: 20px;
+	height: 340px;
+	width: 250px;
+	border: 5px solid #3c2f2f;
+	border-radius: 5px;
+}
+
+#statsTitle {
+	height: 35px;
+	width: 250px;
+	background-color: #be9b7b;
+	font-size: 30px;
+	color: #fff4e6;
+	text-align: center;
+}
+
+#statsListContainer {
+	margin-top: 0px;
+	list-style-type: none;
+}
+
+.statsList {
+	margin-top: 10px;
+	margin-left: -30px;
+	font-size: 20px;
+	color: #854442;
+}
+
+#p1Name {
+	text-decoration: underline;
+}
+
+#p2Name {
+	margin-top: 20px;
+	text-decoration: underline;
+}
+
+#totalTies {
+	margin-top: 15px;
+}
+
+#totalGames {
+	margin-top: 20px;
+}
+
 #board {
 	position: relative;
 	width: 350px;
 	height: 350px;
 	margin: 0px auto;
 	margin-top: 10%;
-	font-size: 700%;
+	font-size: 120px;
 }
 
 .square {
@@ -125,7 +171,7 @@ body {
 	height: 10%;
 	width: 100%;
 	margin-top: 8%;
-	font-size: 300%;
+	font-size: 50px;
 	text-align: center;
 	color: #854442;
 }

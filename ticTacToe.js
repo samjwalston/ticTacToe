@@ -73,13 +73,33 @@ app.controller('ticTacToeCtrl', function($scope, $firebase){
 		}
 	});
 
+	var statsRef = new Firebase('https://samstictactoe.firebaseio.com/stats');
+  var statsSync = $firebase(statsRef);
+  $scope.stats = statsSync.$asArray();
 
-	$scope.lines = ["", "", "", ""];
+  $scope.stats.$loaded(function(){
+  	if($scope.stats.length == 0){
+			$scope.stats.$add({totalGames: "Total Games: 0", p1Wins: "Wins: 0 (0.0%)", p1Losses: "Losses: 0 (0.0%)", p2Wins: "Wins: 0 (0.0%)", p2Losses: "Losses: 0 (0.0%)", ties: "Ties: 0 (0.0%)"});
+		}
+		else{
+			$scope.stats[0].totalGames = "Total Games: 0";
+			$scope.stats[0].p1Wins = "Wins: 0 (0.0%)";
+			$scope.stats[0].p1Losses = "Losses: 0 (0.0%)";
+			$scope.stats[0].p2Wins = "Wins: 0 (0.0%)";
+			$scope.stats[0].p2Losses = "Losses: 0 (0.0%)";
+			$scope.stats[0].ties = "Ties: 0 (0.0%)";
+			$scope.stats.$save(0);
+		}
+  });
 
+
+	var totalGames = 0;
+	var p1Wins = 0;
+	var p2Wins = 0;
+	var ties = 0;
 
 
 	$scope.makeMove = function(index){
-		var cell = document.getElementById("sq" + index);
 		if($scope.counter[0].turn == 0){
 			$scope.players[0].playerOne = true;
 			$scope.players[0].playerTwo = false;
@@ -94,8 +114,6 @@ app.controller('ticTacToeCtrl', function($scope, $firebase){
 				$scope.winMessage[0].message = "Player Two\'s Turn";
 				$scope.winMessage.$save(0);
 				document.getElementById("sq" + index).className = "square chosen";
-				// cell.style.color = "#854442";
-				// cell.style.opacity = "1";
 			}
 			else if((($scope.counter[0].turn % 2) == 1) && ($scope.players[0].playerTwo == true)){
 				var symbol = "O";
@@ -106,8 +124,6 @@ app.controller('ticTacToeCtrl', function($scope, $firebase){
 				$scope.winMessage[0].message = "Player One\'s Turn";
 				$scope.winMessage.$save(0);
 				document.getElementById("sq" + index).className = "square chosen";
-				// cell.style.color = "#854442";
-				// cell.style.opacity = "1";
 			}
 			if($scope.counter[0].turn >= 5){
 				winConditions(symbol);
@@ -132,6 +148,8 @@ app.controller('ticTacToeCtrl', function($scope, $firebase){
 			$scope.winMessage.$save(0);
 			$scope.counter[0].turn = -2;
 			$scope.counter.$save(0);
+			ties++;
+			statsBoard();
 		}
 	};
 
@@ -139,9 +157,13 @@ app.controller('ticTacToeCtrl', function($scope, $firebase){
 	function displayWinner(player){
 		if(player == "X"){
 			$scope.winMessage[0].message = "Player One Wins";
+			p1Wins++;
+			statsBoard();
 		}
 		else if(player == "O"){
 			$scope.winMessage[0].message = "Player Two Wins";
+			p2Wins++;
+			statsBoard();
 		}
 		$scope.winMessage.$save(0);
 		$scope.counter[0].turn = -2;
@@ -170,5 +192,29 @@ app.controller('ticTacToeCtrl', function($scope, $firebase){
 			$scope.square[index].playerMove = "";
 		}
 	};
+
+	// totalGames
+ 	// 	p1Wins
+ 	// 	p2Wins
+ 	// 	ties
+	// $scope.stats[0].
+
+	function statsBoard(){
+		document.getElementById('gameStats').className = "animated fadeIn";
+		totalGames = (p1Wins + p2Wins + ties);
+		printTotalGames = "Total Games: " + totalGames;
+		printP1Wins = "Wins: " + p1Wins + " (" + ((p1Wins / totalGames) * 100).toFixed(1) + "%)";
+		printP1Losses = "Losses: " + p2Wins + " (" + ((p2Wins / totalGames) * 100).toFixed(1) + "%)";
+		printP2Wins = "Wins: " + p2Wins + " (" + ((p2Wins / totalGames) * 100).toFixed(1) + "%)";
+		printP2Losses = "Losses: " + p1Wins + " (" + ((p1Wins / totalGames) * 100).toFixed(1) + "%)";
+		printTies = "Ties: " + ties + " (" + ((ties / totalGames) * 100).toFixed(1) + "%)";
+		$scope.stats[0].totalGames = printTotalGames;
+		$scope.stats[0].p1Wins = printP1Wins;
+		$scope.stats[0].p1Losses = printP1Losses;
+		$scope.stats[0].p2Wins = printP2Wins;
+		$scope.stats[0].p2Losses = printP2Losses;
+		$scope.stats[0].ties = printTies;
+		$scope.stats.$save(0);
+	}
 
 });

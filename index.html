@@ -14,12 +14,29 @@
 </head>
 <body ng-app="ticTacToeApp" ng-controller="ticTacToeCtrl">
 
+<div class="animated fadeIn" id="gameStats">
+	<div class="stats" id="statsTitle">Game Stats</div>
+	<ul id="statsListContainer">
+		<li class="statsList" id="p1Name">Player 1</li>
+		<li class="statsList" ng-bind="stats[0].p1Wins"></li>
+		<li class="statsList" ng-bind="stats[0].p1Losses"></li>
+		<li class="statsList" id="p2Name">Player 2</li>
+		<li class="statsList" ng-bind="stats[0].p2Wins"></li>
+		<li class="statsList" ng-bind="stats[0].p2Losses"></li>
+		<li class="statsList" id="totalTies" ng-bind="stats[0].ties"></li>
+		<li class="statsList" id="totalGames" ng-bind="stats[0].totalGames"></li>
+	</ul>
+</div>
+
 <div id="board">
 	<div class="square" id="sq{{ $index }}" ng-repeat="sq in square track by $index"
 				ng-mouseenter="mouseEnter($index)" ng-mouseleave="mouseLeave($index)"
 				ng-click="makeMove($index)" ng-bind="sq.playerMove">
 	</div>
-	<div class="line" id="ln{{ $index }}" ng-repeat="line in lines track by $index"></div>
+	<div class="line animated fadeInRight" id="ln0"></div>
+	<div class="line animated fadeInRight" id="ln1"></div>
+	<div class="line animated fadeInUp" id="ln2"></div>
+	<div class="line animated fadeInUp" id="ln3"></div>
 </div>
 <p id="winner" ng-bind="winMessage[0].message"></p>
 
