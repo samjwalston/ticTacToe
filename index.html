@@ -13,6 +13,11 @@
   <script type="text/javascript" src="ticTacToe.js" defer></script>
 </head>
 <body ng-app="ticTacToeApp" ng-controller="ticTacToeCtrl">
+<div id="navbar">
+	<input type="button" class="button" id="reset" value="Reset" ng-click="resetButton()">
+	<div id="gameMode">Under Development</div>
+	<input type="button" class="button" id="restart" value="Restart" ng-click="restartButton()">
+</div>
 
 <div class="animated fadeIn" id="gameStats">
 	<div class="stats" id="statsTitle">Game Stats</div>

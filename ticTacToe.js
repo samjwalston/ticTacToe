@@ -193,12 +193,6 @@ app.controller('ticTacToeCtrl', function($scope, $firebase){
 		}
 	};
 
-	// totalGames
- 	// 	p1Wins
- 	// 	p2Wins
- 	// 	ties
-	// $scope.stats[0].
-
 	function statsBoard(){
 		document.getElementById('gameStats').className = "animated fadeIn";
 		totalGames = (p1Wins + p2Wins + ties);
@@ -217,4 +211,31 @@ app.controller('ticTacToeCtrl', function($scope, $firebase){
 		$scope.stats.$save(0);
 	}
 
+	$scope.resetButton = function(){
+		for(var i = 0; i < 9; i++){
+			$scope.square[i].playerMove = "";
+			$scope.square.$save(i);
+		}
+		$scope.counter[0].turn = 0;
+		$scope.counter.$save(0);
+		$scope.winMessage[0].message = "Game starts when a move is made";
+		$scope.winMessage.$save(0);
+		$scope.players[0].playerOne = false;
+		$scope.players[0].playerTwo = true;
+		$scope.players.$save(0);
+	}
+
+	$scope.restartButton = function(){
+		$scope.resetButton();
+		$scope.stats[0].totalGames = "Total Games: 0";
+		$scope.stats[0].p1Wins = "Wins: 0 (0.0%)";
+		$scope.stats[0].p1Losses = "Losses: 0 (0.0%)";
+		$scope.stats[0].p2Wins = "Wins: 0 (0.0%)";
+		$scope.stats[0].p2Losses = "Losses: 0 (0.0%)";
+		$scope.stats[0].ties = "Ties: 0 (0.0%)";
+		$scope.stats.$save(0);
+	}
+
 });
+
+
