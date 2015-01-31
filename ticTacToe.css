@@ -1,4 +1,4 @@
-/* 
+/*
 Dark Brown - #4b3832
 Reddish Brown - #854442
 Cream - #fff4e6
@@ -12,7 +12,7 @@ body {
 	background-color: #fff4e6;
 	margin: 0px;
 	/*margin-top: -100px;*/
-	font-family: 'Overlock', arial, serif;
+	font-family: arial, sans-serif;
 	font-size: 100%;
 	color: #be9b7b;
 }
@@ -21,10 +21,20 @@ body {
 	visibility: hidden;
 }
 
+.hover {
+	opacity: 0.5;
+	color: #854442;
+}
+
+.chosen {
+	opacity: 1;
+	color: #854442;
+}
+
 #board {
 	position: relative;
-	width: 37%;
-	height: 45%;
+	width: 350px;
+	height: 350px;
 	margin: 0px auto;
 	margin-top: 10%;
 	font-size: 700%;
@@ -115,7 +125,7 @@ body {
 	height: 10%;
 	width: 100%;
 	margin-top: 8%;
-	font-size: 500%;
+	font-size: 300%;
 	text-align: center;
 	color: #854442;
 }

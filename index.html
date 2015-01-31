@@ -15,10 +15,10 @@
 <body ng-app="ticTacToeApp" ng-controller="ticTacToeCtrl">
 
 <div id="board">
-	<div class="square" id="sq{{ $index }}" ng-repeat="sq in square track by $index" ng-click="makeMove($index)" ng-bind="sq.playerMove">
-		<!-- If cell value is equal to blank then it puts &nbsp otherwise leave it alone -->
-		<!-- {{ row == "" ? "&nbsp;" : row }} -->
-		</div>
+	<div class="square" id="sq{{ $index }}" ng-repeat="sq in square track by $index"
+				ng-mouseenter="mouseEnter($index)" ng-mouseleave="mouseLeave($index)"
+				ng-click="makeMove($index)" ng-bind="sq.playerMove">
+	</div>
 	<div class="line" id="ln{{ $index }}" ng-repeat="line in lines track by $index"></div>
 </div>
 <p id="winner" ng-bind="winMessage[0].message"></p>

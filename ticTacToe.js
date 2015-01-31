@@ -7,21 +7,6 @@ app.controller('ticTacToeCtrl', function($scope, $firebase){
   var boardSync = $firebase(boardRef);
   $scope.square = boardSync.$asArray();
 
-  // firebase turnNum stuff
-  var countRef = new Firebase('https://samstictactoe.firebaseio.com/counter');
-  var countSync = $firebase(countRef);
-  $scope.counter = countSync.$asArray();
-
-  // firebase winMessage stuff
-  var winRef = new Firebase('https://samstictactoe.firebaseio.com/winMessage');
-  var winSync = $firebase(winRef);
-  $scope.winMessage = winSync.$asArray();
-
-  var playerRef = new Firebase('https://samstictactoe.firebaseio.com/players');
-  var playerSync = $firebase(playerRef);
-  $scope.players = playerSync.$asArray();
-
-  // Credits to Wendy for help with the firebase functionality
   $scope.square.$loaded(function(){
 		if($scope.square.length == 0){
 			for(var i = 0; i < 9; i++){
@@ -35,7 +20,14 @@ app.controller('ticTacToeCtrl', function($scope, $firebase){
 			}
 		}
 	});
-	$scope.counter.$loaded(function(){
+
+
+  // firebase turnNum stuff
+  var countRef = new Firebase('https://samstictactoe.firebaseio.com/counter');
+  var countSync = $firebase(countRef);
+  $scope.counter = countSync.$asArray();
+
+  $scope.counter.$loaded(function(){
 		if($scope.counter.length == 0){
 			$scope.counter.$add({turn: 0});
 		}
@@ -48,15 +40,28 @@ app.controller('ticTacToeCtrl', function($scope, $firebase){
 			$scope.counter.$save(0);
 		}
 	});
-	$scope.winMessage.$loaded(function(){
+
+
+  // firebase winMessage stuff
+  var winRef = new Firebase('https://samstictactoe.firebaseio.com/winMessage');
+  var winSync = $firebase(winRef);
+  $scope.winMessage = winSync.$asArray();
+
+  $scope.winMessage.$loaded(function(){
 		if($scope.winMessage.length == 0){
-			$scope.winMessage.$add({message: ""});
+			$scope.winMessage.$add({message: "Game starts when a move is made"});
 		}
 		else{
-			$scope.winMessage[0].message = "";
+			$scope.winMessage[0].message = "Game starts when a move is made";
 			$scope.winMessage.$save(0);
 		}
 	});
+
+  // fire base player stuff
+  var playerRef = new Firebase('https://samstictactoe.firebaseio.com/players');
+  var playerSync = $firebase(playerRef);
+  $scope.players = playerSync.$asArray();
+
 	$scope.players.$loaded(function(){
 		if($scope.players.length == 0){
 			$scope.players.$add({playerOne: false, playerTwo: true});
@@ -66,21 +71,51 @@ app.controller('ticTacToeCtrl', function($scope, $firebase){
 			$scope.players[0].playerTwo = true;
 			$scope.players.$save(0);
 		}
-	})
+	});
+
+
 	$scope.lines = ["", "", "", ""];
 
-	function displayWinner(player){
-		if(player == "X"){
-			$scope.winMessage[0].message = "Player 1 Wins";
-			$scope.winMessage.$save(0);
+
+
+	$scope.makeMove = function(index){
+		var cell = document.getElementById("sq" + index);
+		if($scope.counter[0].turn == 0){
+			$scope.players[0].playerOne = true;
+			$scope.players[0].playerTwo = false;
 		}
-		else if(player == "O"){
-			$scope.winMessage[0].message = "Player 2 Wins";
+		if(($scope.square[index].playerMove !== "X") && ($scope.square[index].playerMove !== "O") && ($scope.counter[0].turn >= 0)){
+			if((($scope.counter[0].turn % 2) == 0) && ($scope.players[0].playerOne == true)){
+				var symbol = "X";
+				$scope.square[index].playerMove = symbol;
+				$scope.square.$save($scope.square[index]);
+				$scope.counter[0].turn++;
+				$scope.counter.$save(0);
+				$scope.winMessage[0].message = "Player Two\'s Turn";
+				$scope.winMessage.$save(0);
+				document.getElementById("sq" + index).className = "square chosen";
+				// cell.style.color = "#854442";
+				// cell.style.opacity = "1";
+			}
+			else if((($scope.counter[0].turn % 2) == 1) && ($scope.players[0].playerTwo == true)){
+				var symbol = "O";
+				$scope.square[index].playerMove = symbol;
+				$scope.square.$save($scope.square[index]);
+				$scope.counter[0].turn++;
+				$scope.counter.$save(0);
+				$scope.winMessage[0].message = "Player One\'s Turn";
+				$scope.winMessage.$save(0);
+				document.getElementById("sq" + index).className = "square chosen";
+				// cell.style.color = "#854442";
+				// cell.style.opacity = "1";
+			}
+			if($scope.counter[0].turn >= 5){
+				winConditions(symbol);
+			}
 		}
-		$scope.winMessage.$save(0);
-		$scope.counter[0].turn = -2;
-		$scope.counter.$save(0);
 	};
+
+
 	function winConditions(player){
 		if((($scope.square[0].playerMove == $scope.square[1].playerMove) && ($scope.square[0].playerMove == $scope.square[2].playerMove) && ($scope.square[0].playerMove !== "")) ||
 			(($scope.square[3].playerMove == $scope.square[4].playerMove) && ($scope.square[3].playerMove == $scope.square[5].playerMove) && ($scope.square[3].playerMove !== "")) ||
@@ -99,31 +134,41 @@ app.controller('ticTacToeCtrl', function($scope, $firebase){
 			$scope.counter.$save(0);
 		}
 	};
-	$scope.makeMove = function(index){
-		if(($scope.square[0].playerMove == "") && ($scope.square[1].playerMove == "") && ($scope.square[2].playerMove == "") &&
-			($scope.square[3].playerMove == "") && ($scope.square[4].playerMove == "") && ($scope.square[5].playerMove == "") &&
-			($scope.square[6].playerMove == "") && ($scope.square[7].playerMove == "") && ($scope.square[8].playerMove == "")){
-			$scope.players[0].playerOne = true;
-			$scope.players[0].playerTwo = false;
+
+
+	function displayWinner(player){
+		if(player == "X"){
+			$scope.winMessage[0].message = "Player One Wins";
 		}
-		console.log($scope.players[0].playerOne);
-		console.log($scope.players[0].playerTwo);
-		if(($scope.square[index].playerMove == "") && ($scope.counter[0].turn >= 0)){
-			if((($scope.counter[0].turn % 2) == 0) && ($scope.players[0].playerOne == true)){
-				var symbol = "X";
-				$scope.square[index].playerMove = symbol;
-				$scope.square.$save($scope.square[index]);
-				$scope.counter[0].turn++;
-				$scope.counter.$save(0);
+		else if(player == "O"){
+			$scope.winMessage[0].message = "Player Two Wins";
+		}
+		$scope.winMessage.$save(0);
+		$scope.counter[0].turn = -2;
+		$scope.counter.$save(0);
+	};
+
+	$scope.mouseEnter = function(index){
+		if(($scope.square[index].playerMove !== "X") && ($scope.square[index].playerMove !== "O") && ($scope.counter[0].turn >= 0)){
+			if((($scope.counter[0].turn % 2) == 1) && ($scope.players[0].playerTwo == true)){
+				document.getElementById("sq" + index).className = " square hover";
+				$scope.square[index].playerMove = " O ";
 			}
-			else if((($scope.counter[0].turn % 2) == 1) && ($scope.players[0].playerTwo == true)){
-				var symbol = "O";
-				$scope.square[index].playerMove = symbol;
-				$scope.square.$save($scope.square[index]);
-				$scope.counter[0].turn++;
-				$scope.counter.$save(0);
+			else if((($scope.counter[0].turn % 2) == 0) && ($scope.players[0].playerOne == true)){
+				document.getElementById("sq" + index).className = "square hover";
+				$scope.square[index].playerMove = " X ";
 			}
-			winConditions(symbol);
+			else if($scope.counter[0].turn == 0){
+				document.getElementById("sq" + index).className = "square hover";
+				$scope.square[index].playerMove = " X ";
+			}
 		}
 	};
+	$scope.mouseLeave = function(index){
+		if(($scope.square[index].playerMove !== "X") && ($scope.square[index].playerMove !== "O")){
+			document.getElementById("sq" + index).className = "square";
+			$scope.square[index].playerMove = "";
+		}
+	};
+
 });
