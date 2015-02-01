@@ -1,4 +1,5 @@
 /*
+   Styling Colors
 Dark Brown - #4b3832
 Reddish Brown - #854442
 Cream - #fff4e6
@@ -12,197 +13,172 @@ body {
 	background-color: #fff4e6;
 	margin: 0px;
 	font-family: arial, sans-serif;
-	font-size: 100%;
 	color: #be9b7b;
 }
 
+/* Hover Effect Changes */
 .hidden {
 	visibility: hidden;
 }
-
 .hover {
 	opacity: 0.5;
 	color: #854442;
 }
-
 .chosen {
 	opacity: 1;
 	color: #854442;
 }
 
-#navbar {
-	/*visibility: hidden;*/
-	position: relative;
-	width: 100%;
-	height: 30px;
-	/*margin-top: 7.5%;*/
-	padding-left: 1%;
-	margin-left: -1%;
-	background-color: #be9b7b;
-	color: #fff4e6;
-}
 
+/* Navigation Bar */
+#navbar {
+	position: relative;
+	height: 30px;
+	width: 100%;
+	background-color: #be9b7b;
+}
 #gameMode {
-	display: inline;
 	position: absolute;
 	left: 38%;
+	height: 36px;
 	width: 25%;
-	height: 120%;
-	padding-top: 1.25%;
 	background-color: #854442;
+	padding-top: 15px;
 	border-bottom-left-radius: 20px;
 	border-bottom-right-radius: 20px;
-	font-size: 165%;
+	font-size: 29px;
+	color: #fff4e6;
 	text-align: center;
 }
-
-
+/* NavBar Buttons */
+.navBarButton {
+	outline: none;
+	position: absolute;
+	height: 33px;
+	width: 10%;
+	border: none;
+	background-color: #4b3832;
+	font-size: 18px;
+	color: #fff4e6;
+}
 #reset {
-	position: absolute;
 	left: 28%;
-	outline: none;
-	height: 110%;
-	width: 10%;
-	margin-top: 0%;
-	border: 0px solid ;
 	border-bottom-left-radius: 5px;
-	background-color: #4b3832;
-	font-size: 100%;
-	color: #fff4e6;
 }
-
 #restart {
-	position: absolute;
 	left: 63%;
-	outline: none;
-	height: 110%;
-	width: 10%;
-	margin-top: 0%;
-	border: 0px solid ;
 	border-bottom-right-radius: 5px;
-	background-color: #4b3832;
-	font-size: 100%;
-	color: #fff4e6;
 }
 
+
+/* Game Messages */
+#winner {
+	height: 50px;
+	width: 100%;
+	margin-top: 40px;
+	font-size: 50px;
+	text-align: center;
+	color: #854442;
+}
+
+
+/* Stats Box */
+.stats {
+	width: 250px;
+	font-size: 30px;
+	color: #fff4e6;
+}
 #gameStats {
 	position: absolute;
 	top: 150px;
 	left: 20px;
 	height: 340px;
-	width: 250px;
 	border: 5px solid #3c2f2f;
 	border-radius: 5px;
 }
-
 #statsTitle {
 	height: 35px;
-	width: 250px;
 	background-color: #be9b7b;
-	font-size: 30px;
-	color: #fff4e6;
 	text-align: center;
 }
-
 #statsListContainer {
 	margin-top: 0px;
 	list-style-type: none;
 }
-
+/* Stats List */
 .statsList {
 	margin-top: 10px;
 	margin-left: -30px;
 	font-size: 20px;
 	color: #854442;
 }
-
 #p1Name {
 	text-decoration: underline;
 }
-
 #p2Name {
 	margin-top: 20px;
 	text-decoration: underline;
 }
-
 #totalTies {
 	margin-top: 15px;
 }
-
 #totalGames {
 	margin-top: 20px;
 }
 
+
+/* Chat Box */
+.chatBox {
+	width: 250px;
+	color: #854442;
+	font-size: 15px;
+}
 #chatBox {
 	position: absolute;
 	top: 150px;
 	right: 20px;
 	height: 340px;
-	width: 250px;
-	border-radius: 5px;
 }
-
 #chatBoxText {
-	overflow: none;
-	position: relative;
-	height: 320px;
-	width: 250px;
-	color: #854442;
-}
-
-#chatBoxTextInner {
 	overflow: auto;
 	position: relative;
-	bottom: 0;
-	height: 320px;
-	width: 250px;
+	height: 300px;
 	padding-top: 15px;
-	color: #854442;
-	font-size: 15px;
 }
-
 #chatBoxText p {
 	margin-top: -15px;
-	width: 100%;
-	float: bottom;
 }
-
-#chatBoxInput {
+/* Chat Box Input */
+.chatBoxInput {
+	outline: none;
 	position: absolute;
 	bottom: 0px;
-	height: 20px;
-	width: 200px;
 	background-color: #fff4e6;
 	border: 1px solid #be9b7b;
-	border-right: none;
-	outline: none;
 	font-size: 13px;
 	color: #4b3832;
 }
-
+#chatBoxInput {
+	height: 20px;
+	width: 200px;
+	border-right: none;
+}
 #chatBoxButton {
-	position: absolute;
-	bottom: 0px;
 	right: 0px;
 	height: 24px;
 	width: 50px;
-	border: none;
-	background-color: #fff4e6;
-	border: 1px solid #be9b7b;
-	outline: none;
-	font-size: 13px;
-	color: #4b3832;
 }
 
+
+/* Game Board */
 #board {
 	position: relative;
 	width: 350px;
 	height: 350px;
 	margin: 0px auto;
-	margin-top: -10px;
 	font-size: 120px;
 }
-
+/* Tic Tac Toe Squares */
 .square {
 	position: absolute;
 	width: 31%;
@@ -210,52 +186,43 @@ body {
 	text-align: center;
 	display: inline-block;
 }
-
 #sq0 {
 	top: 0%;
 	left: 1%;
 }
-
 #sq1 {
 	top: 0%;
 	left: 34%;
 }
-
 #sq2 {
 	top: 0%;
 	left: 67%;
 }
-
 #sq3 {
 	top: 34%;
 	left: 1%;
 }
-
 #sq4 {
 	top: 34%;
 	left: 34%;
 }
-
 #sq5 {
 	top: 34%;
 	left: 67%;
 }
-
 #sq6 {
 	top: 67%;
 	left: 1%;
 }
-
 #sq7 {
 	top: 67%;
 	left: 34%;
 }
-
 #sq8 {
 	top: 67%;
 	left: 67%;
 }
-
+/* Board Divisions */
 .line {
 	position: absolute;
 	background-color: #3c2f2f;
@@ -263,32 +230,19 @@ body {
 	width: 100%;
 	border-radius: 5px;
 }
-
 #ln0 {
 	height: 2%;
 	top: 34%;
 }
-
 #ln1 {
 	height: 2%;
 	top: 68%;
 }
-
 #ln2 {
 	width: 2%;
 	left: 32%;
 }
-
 #ln3 {
 	width: 2%;
 	left: 66%;
-}
-
-#winner {
-	height: 50px;
-	width: 100%;
-	margin-top:40px;
-	font-size: 50px;
-	text-align: center;
-	color: #854442;
 }

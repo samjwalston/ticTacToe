@@ -1,27 +1,37 @@
  <!DOCTYPE html>
 <html>
 <head>
-	<title>Tic Tac Toe Game</title>
-	<link type="text/css" rel="stylesheet" href="animate.css">
+	<title>Samasy's Tic Tac Toe</title>
+	<!-- CSS -->
 	<link type="text/css" rel="stylesheet" href="ticTacToe.css">
+	<link type="text/css" rel="stylesheet" href="animate.css">
 	<!-- Angular -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
   <!-- Firebase -->
   <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
   <!-- AngularFire -->
   <script src="https://cdn.firebase.com/libs/angularfire/0.9.1/angularfire.min.js"></script>
+  <!-- JavaScript -->
   <script type="text/javascript" src="ticTacToe.js" defer></script>
 </head>
 <body ng-app="ticTacToeApp" ng-controller="ticTacToeCtrl">
+
+<!-- Navigation Bar -->
 <div id="navbar">
-	<input type="button" class="button" id="reset" value="Reset" ng-click="resetButton()">
+	<!-- Button for clearing the board -->
+	<input type="button" class="navBarButton" id="reset" value="Reset" ng-click="resetButton()">
 	<div id="gameMode">Halp! I need styles tips</div>
-	<input type="button" class="button" id="restart" value="Restart" ng-click="restartButton()">
+	<!-- Button for clearing the board and game stats -->
+	<input type="button" class="navBarButton" id="restart" value="Restart" ng-click="restartButton()">
 </div>
 
-<div class="animated fadeIn" id="gameStats">
+<!-- Game Messages -->
+<p id="winner" ng-bind="winMessage[0].message"></p>
+
+<!-- Game Stats Board -->
+<div class="stats animated fadeIn" id="gameStats">
 	<div class="stats" id="statsTitle">Game Stats</div>
-	<ul id="statsListContainer">
+	<ul class="stats" id="statsListContainer">
 		<li class="statsList" id="p1Name">Player 1</li>
 		<li class="statsList" ng-bind="stats[0].p1Wins"></li>
 		<li class="statsList" ng-bind="stats[0].p1Losses"></li>
@@ -33,21 +43,22 @@
 	</ul>
 </div>
 
-<div id="chatBox">
-	<div id="chatBoxText">
-		<div id="chatBoxTextInner">
-			<p ng-repeat="c in chat track by $index">{{ c.text }}</p>
-		</div>
+<!-- Chat Box -->
+<div class="chatBox" id="chatBox">
+	<div class="chatBox" id="chatBoxText">
+		<p class="chatBox" ng-repeat="c in chat track by $index">{{ c.text }}</p>
 	</div>
-	<input type="text" id="chatBoxInput" ng-model="chatBoxInput">
-	<input type="button" id="chatBoxButton" value="Enter" ng-click="chatBox()">
+	<input type="text" class="chatBoxInput" id="chatBoxInput" ng-model="chatBoxInput">
+	<input type="button" class="chatBoxInput" id="chatBoxButton" value="Enter" ng-click="chatBox()">
 </div>
 
-<p id="winner" ng-bind="winMessage[0].message"></p>
+<!-- Game Board -->
 <div id="board">
+	<!-- Tic Tac Toe Squares -->
 	<div class="square" id="sq{{ $index }}" ng-repeat="sq in square track by $index"
 				ng-mouseenter="mouseEnter($index)" ng-mouseleave="mouseLeave($index)"
 				ng-click="makeMove($index)" ng-bind="sq.playerMove"></div>
+	<!-- Board Divisions -->
 	<div class="line animated fadeInRightBig" id="ln0"></div>
 	<div class="line animated fadeInRightBig" id="ln1"></div>
 	<div class="line animated fadeInUpBig" id="ln2"></div>
