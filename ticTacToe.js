@@ -1,6 +1,5 @@
 var app = angular.module('ticTacToeApp', ['firebase']);
 
-
 app.controller('ticTacToeCtrl', function($scope, $firebase){
 	// firebase board stuff
 	var boardRef = new Firebase('https://samstictactoe.firebaseio.com/board');
@@ -49,10 +48,10 @@ app.controller('ticTacToeCtrl', function($scope, $firebase){
 
   $scope.winMessage.$loaded(function(){
 		if($scope.winMessage.length == 0){
-			$scope.winMessage.$add({message: "Game starts when a move is made"});
+			$scope.winMessage.$add({message: "Waiting on first move"});
 		}
 		else{
-			$scope.winMessage[0].message = "Game starts when a move is made";
+			$scope.winMessage[0].message = "Waiting on first move";
 			$scope.winMessage.$save(0);
 		}
 	});
@@ -64,11 +63,13 @@ app.controller('ticTacToeCtrl', function($scope, $firebase){
 
 	$scope.players.$loaded(function(){
 		if($scope.players.length == 0){
-			$scope.players.$add({playerOne: false, playerTwo: true});
+			$scope.players.$add({playerOne: false, playerTwo: false, playerOneChosen: false, playerTwoChosen: false});
 		}
 		else{
 			$scope.players[0].playerOne = false;
-			$scope.players[0].playerTwo = true;
+			$scope.players[0].playerTwo = false;
+			$scope.players[0].playerOneChosen = false;
+			$scope.players[0].playerTwoChosen = false;
 			$scope.players.$save(0);
 		}
 	});
@@ -92,6 +93,15 @@ app.controller('ticTacToeCtrl', function($scope, $firebase){
 		}
   });
 
+  var chatRef = new Firebase('https://samstictactoe.firebaseio.com/chat');
+  var chatSync = $firebase(chatRef);
+  $scope.chat = chatSync.$asArray();
+
+  $scope.chatBox = function(){
+    $scope.chat.$add({text: $scope.chatBoxInput});
+    $scope.chatBoxInput = "";
+  };
+
 
 	var totalGames = 0;
 	var p1Wins = 0;
@@ -102,7 +112,9 @@ app.controller('ticTacToeCtrl', function($scope, $firebase){
 	$scope.makeMove = function(index){
 		if($scope.counter[0].turn == 0){
 			$scope.players[0].playerOne = true;
-			$scope.players[0].playerTwo = false;
+		}
+		else if(($scope.counter[0].turn == 1) && ($scope.players[0].playerOne !== true)){
+			$scope.players[0].playerTwo = true;
 		}
 		if(($scope.square[index].playerMove !== "X") && ($scope.square[index].playerMove !== "O") && ($scope.counter[0].turn >= 0)){
 			if((($scope.counter[0].turn % 2) == 0) && ($scope.players[0].playerOne == true)){
@@ -180,6 +192,10 @@ app.controller('ticTacToeCtrl', function($scope, $firebase){
 				document.getElementById("sq" + index).className = "square hover";
 				$scope.square[index].playerMove = " X ";
 			}
+			else if($scope.counter[0].turn == 1){
+				document.getElementById("sq" + index).className = "square hover";
+				$scope.square[index].playerMove = " O ";
+			}
 			else if($scope.counter[0].turn == 0){
 				document.getElementById("sq" + index).className = "square hover";
 				$scope.square[index].playerMove = " X ";
@@ -218,7 +234,7 @@ app.controller('ticTacToeCtrl', function($scope, $firebase){
 		}
 		$scope.counter[0].turn = 0;
 		$scope.counter.$save(0);
-		$scope.winMessage[0].message = "Game starts when a move is made";
+		$scope.winMessage[0].message = "Waiting on first move";
 		$scope.winMessage.$save(0);
 		$scope.players[0].playerOne = false;
 		$scope.players[0].playerTwo = true;
@@ -237,5 +253,3 @@ app.controller('ticTacToeCtrl', function($scope, $firebase){
 	}
 
 });
-
-

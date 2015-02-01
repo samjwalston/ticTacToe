@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
 	<title>Tic Tac Toe Game</title>
@@ -15,7 +15,7 @@
 <body ng-app="ticTacToeApp" ng-controller="ticTacToeCtrl">
 <div id="navbar">
 	<input type="button" class="button" id="reset" value="Reset" ng-click="resetButton()">
-	<div id="gameMode">Under Development</div>
+	<div id="gameMode">Halp! I need styles tips</div>
 	<input type="button" class="button" id="restart" value="Restart" ng-click="restartButton()">
 </div>
 
@@ -33,17 +33,26 @@
 	</ul>
 </div>
 
+<div id="chatBox">
+	<div id="chatBoxText">
+		<div id="chatBoxTextInner">
+			<p ng-repeat="c in chat track by $index">{{ c.text }}</p>
+		</div>
+	</div>
+	<input type="text" id="chatBoxInput" ng-model="chatBoxInput">
+	<input type="button" id="chatBoxButton" value="Enter" ng-click="chatBox()">
+</div>
+
+<p id="winner" ng-bind="winMessage[0].message"></p>
 <div id="board">
 	<div class="square" id="sq{{ $index }}" ng-repeat="sq in square track by $index"
 				ng-mouseenter="mouseEnter($index)" ng-mouseleave="mouseLeave($index)"
-				ng-click="makeMove($index)" ng-bind="sq.playerMove">
-	</div>
-	<div class="line animated fadeInRight" id="ln0"></div>
-	<div class="line animated fadeInRight" id="ln1"></div>
-	<div class="line animated fadeInUp" id="ln2"></div>
-	<div class="line animated fadeInUp" id="ln3"></div>
+				ng-click="makeMove($index)" ng-bind="sq.playerMove"></div>
+	<div class="line animated fadeInRightBig" id="ln0"></div>
+	<div class="line animated fadeInRightBig" id="ln1"></div>
+	<div class="line animated fadeInUpBig" id="ln2"></div>
+	<div class="line animated fadeInUpBig" id="ln3"></div>
 </div>
-<p id="winner" ng-bind="winMessage[0].message"></p>
 
 </body>
 </html>
