@@ -76,14 +76,12 @@ app.controller('ticTacToeCtrl', function($scope, $firebase){
 	$scope.players.$loaded(function(){
 		// If the player choices have not been created then it adds it to the database
 		if($scope.players.length == 0){
-			$scope.players.$add({playerOne: false, playerTwo: false, playerOneChosen: false, playerTwoChosen: false});
+			$scope.players.$add({playerOne: false, playerTwo: false});
 		}
 		// Otherwise it sets it back to the default values
 		else{
 			$scope.players[0].playerOne = false;
 			$scope.players[0].playerTwo = false;
-			$scope.players[0].playerOneChosen = false;
-			$scope.players[0].playerTwoChosen = false;
 			$scope.players.$save(0);
 		}
 	});
@@ -151,6 +149,10 @@ app.controller('ticTacToeCtrl', function($scope, $firebase){
 				$scope.counter[0].turn++;
 				$scope.winMessage[0].message = "Player Two\'s Turn";
 				document.getElementById("sq" + index).className = "square chosen";
+				// Saves all the changed values back to the database
+				$scope.square.$save($scope.square[index]);
+				$scope.counter.$save(0);
+				$scope.winMessage.$save(0);
 			}
 			// Otherwise if it is an odd turn and the player clicking the square is playerTwo it allows an 'O' to be placed
 			else if((($scope.counter[0].turn % 2) == 1) && ($scope.players[0].playerTwo == true)){
@@ -161,11 +163,11 @@ app.controller('ticTacToeCtrl', function($scope, $firebase){
 				$scope.counter[0].turn++;
 				$scope.winMessage[0].message = "Player One\'s Turn";
 				document.getElementById("sq" + index).className = "square chosen";
+				// Saves all the changed values back to the database
+				$scope.square.$save($scope.square[index]);
+				$scope.counter.$save(0);
+				$scope.winMessage.$save(0);
 			}
-			// Saves all the changed values back to the database
-			$scope.square.$save($scope.square[index]);
-			$scope.counter.$save(0);
-			$scope.winMessage.$save(0);
 			// Then if the turn is greater than or equal to five it calls the winConditions function
 			if($scope.counter[0].turn >= 5){
 				// This is why I assigned a var as 'X' or 'O' so I could pass it through to the next function
